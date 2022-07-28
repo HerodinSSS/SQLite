@@ -1,11 +1,11 @@
 import csv
 
-"""table_data = [
+"""little_data = [
     ['a', 'b', 'c'],
     ['ABC', 'b', 'c'],
     ['a', 'XYZ', 'c']
 ]
-for row in table_data:
+for row in little_data:
     print("{: >5} {: >5} {: >5}".format(*row))
 
 
@@ -19,6 +19,4 @@ Nomes = ["PrimeiroNome", "SegundoNome", "TerceiroNome"]
 
 print("\n".join([' '.join(['{:16}'.format(x) for x in Nomes]) for y in Nome]))"""
 
-with open('data.csv', 'w') as csvfile:
-        filewrite = csv.writer(csvfile, delimiter=',')
-        filewrite.writerow(['Ola', 'Comovai'])
+print("Hello".lower)

@@ -1,9 +1,10 @@
-import sqlite3, functions
+import sqlite3
+import functions
 
-con = sqlite3.connect('dataTable.db')
+con = sqlite3.connect('data.db')
 cur = con.cursor()
 
-#Menu
+# Menu
 while True:
     print("( 1 ) Create a Table \n( 2 ) Create a new Colum \n( 3 ) Create a CSV file or uptade \n( 4 ) Add another row \n( 5 ) NONE \n( 6 ) Show table")
     question = int(input(""))
@@ -22,8 +23,8 @@ while True:
     else:
         pass
 
-#Saving
+# Saving
 con.commit()
 
-#Closing the aplication
+# Closing the aplication
 con.close()
