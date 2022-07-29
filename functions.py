@@ -2,8 +2,11 @@ import csv
 
 #Creates a DataTable
 def createTABLE(curs):
-    curs.execute(f"""CREATE TABLE test
+    try:
+        curs.execute(f"""CREATE TABLE test
                                         (id integer, brand test, name text, quantity integer, price integer, total real, url text, notes text, unit text)""")
+    except:
+        print("You already have this data table")
 
 #Create a Column
 def crateColumn(curs):
@@ -11,6 +14,8 @@ def crateColumn(curs):
     colmn = input("What is the name of the column: ")
     typ = input("INTEGER: REAL: TEXT: BLOB: ")
     curs.execute(f"ALTER TABLE test ADD COLUMN {colmn} {typ}")
+
+
 
 #Create a CSV file
 def createCSV(curs):
@@ -36,15 +41,15 @@ def addRow(table):
     unit = input("Unit = ")
     table.execute(f"INSERT INTO test VALUES({id}, '{brand}', '{name}', {quantity}, {price}, {total}, '{url}', '{notes}', '{unit}')")
 
-    """table = input("What is the table's name that you want to add another row? ")
-    brand = input("Brand = ")
-    item = input("Item = ")
-    quantity = input("Quantity = ")
-    price = int(input("Price = "))
-    total = int(quantity) * price # The total is the total price of the item (item x price = total)
-    url = input("URL = ")
-    note = input("Note =  ")
-    table.execute(f"INSERT INTO {table} VALUES('{brand}', '{item}', '{quantity}', {price}, {total}, '{url}', '{note}')")"""
+# You change the of a specific row by the id number
+def changeValue(curs):
+    colum = input("What colum is the value that you want to change(brand, name, quantity, value, url, notes, unit)\n")
+    change = input("New value = ")
+    id = input("What its id : ")
+    try: 
+        curs.execute(f"UPDATE test SET {colum.lower()} = '{change}' WHERE id = {id};")
+    except:
+        print("There is a error. Your value does not macht with the data.")
 
 #Change any data in the table
 def deleteRow(curs):
@@ -57,8 +62,7 @@ def deleteRow(curs):
 
 #Printing the dataTable
 def showTable(curs):
-    table = input("Which table? ")
-    for row in curs.execute(f"SELECT * FROM {table}"):
+    for row in curs.execute(f"SELECT * FROM test"):
         for eachData in row:
             print(f"{eachData}", end=(" " * (5 - len(str(eachData)[-1]))))
         print("\n")
